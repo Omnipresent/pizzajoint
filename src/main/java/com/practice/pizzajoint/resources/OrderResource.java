@@ -57,12 +57,13 @@ public class OrderResource {
     
     @POST
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-    public int prepareOrder(@FormParam("name") String name,
+    public int prepareOrder(@FormParam("ordername") String name,
                             @FormParam("date") Date orderDate,
                             @FormParam("ready") @DefaultValue ("false") boolean enrolled,
                             @FormParam("toppings") @DefaultValue("") CsvParam csvToppings) throws IOException, Throwable {
         List<Topping> toppings = Lists.newLinkedList();
         for (String toppingStr : csvToppings.getValue()) {
+            System.out.println("toppingStr: " + toppingStr);
             toppings.add(MAPPER.readValue(toppingStr, Topping.class));
         }
         
