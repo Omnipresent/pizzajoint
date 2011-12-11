@@ -58,7 +58,7 @@ public class OrderResource {
     @POST
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     public int prepareOrder(@FormParam("ordername") String name,
-                            @FormParam("date") Date orderDate,
+                            @FormParam("orderdate") Date orderDate,
                             @FormParam("ready") @DefaultValue ("false") boolean enrolled,
                             @FormParam("toppings") @DefaultValue("") CsvParam csvToppings) throws IOException, Throwable {
         List<Topping> toppings = Lists.newLinkedList();
