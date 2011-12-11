@@ -23,8 +23,14 @@ public class Order {
     private final String orderName;
     private final boolean isReady;
     private final Date dateOfOrder;
+    private final String crustType;
     private final List<Topping> toppings;
 
+    
+    public String getCrustType() {
+        return this.crustType;
+    }
+    
     public static AtomicInteger getID_COUNTER() {
         return ID_COUNTER;
     }
@@ -49,13 +55,14 @@ public class Order {
         return toppings;
     }
     
-    public Order (String name, boolean ready, Date orderDate, Iterable<Topping> toppings) {
-        this(ID_COUNTER.incrementAndGet(), name, ready, orderDate, toppings);
+    public Order (String name, String crustType, boolean ready, Date orderDate, Iterable<Topping> toppings) {
+        this(ID_COUNTER.incrementAndGet(), name, crustType, ready, orderDate, toppings);
     }
     
     @JsonCreator
     public Order (@JsonProperty("uid") int id, 
                   @JsonProperty("name") String name,
+                  @JsonProperty("crusttype") String crustType,
                   @JsonProperty("ready") boolean ready,
                   @JsonProperty("orderdate") Date orderDate,
                   @JsonProperty("toppings") Iterable<Topping> toppings) {
@@ -63,6 +70,7 @@ public class Order {
         this.orderName = name;
         this.isReady = ready;
         this.dateOfOrder = orderDate;
+        this.crustType = crustType;
         this.toppings = Collections.unmodifiableList(Lists.newArrayList(toppings));
     }
     

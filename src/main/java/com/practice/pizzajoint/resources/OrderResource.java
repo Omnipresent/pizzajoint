@@ -59,7 +59,8 @@ public class OrderResource {
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     public int prepareOrder(@FormParam("ordername") String name,
                             @FormParam("orderdate") Date orderDate,
-                            @FormParam("pickup") @DefaultValue ("false") boolean enrolled,
+                            @FormParam("pizzatype") String type,
+                            @FormParam("pickup") @DefaultValue ("false") boolean pickup,
                             @FormParam("toppings") @DefaultValue("") CsvParam csvToppings) throws IOException, Throwable {
         List<Topping> toppings = Lists.newLinkedList();
         for (String toppingStr : csvToppings.getValue()) {
@@ -67,7 +68,7 @@ public class OrderResource {
             toppings.add(MAPPER.readValue(toppingStr, Topping.class));
         }
         
-        final Order newOrder = new Order(name, enrolled, orderDate, toppings);
+        final Order newOrder = new Order(name, type, pickup, orderDate, toppings);
         final Order oldOrder = ORDERS.put(newOrder.getId(), newOrder);
         return newOrder.getId();
     }
