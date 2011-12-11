@@ -9,6 +9,7 @@ import com.google.common.collect.Maps;
 import com.practice.pizzajoint.json.Order;
 import com.practice.pizzajoint.json.Topping;
 import com.practice.pizzajoint.parameter.CsvParam;
+import com.practice.pizzajoint.parameter.DateParam;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
@@ -58,17 +59,18 @@ public class OrderResource {
     @POST
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     public int prepareOrder(@FormParam("ordername") String name,
-                            @FormParam("orderdate") Date orderDate,
+                            @FormParam("orderdate") DateParam orderDate,
                             @FormParam("pizzatype") String type,
                             @FormParam("pickup") @DefaultValue ("false") boolean pickup,
                             @FormParam("toppings") @DefaultValue("") CsvParam csvToppings) throws IOException, Throwable {
         List<Topping> toppings = Lists.newLinkedList();
+        Date dateOfOrder = orderDate.getValue();
         for (String toppingStr : csvToppings.getValue()) {
             System.out.println("toppingStr: " + toppingStr);
-            toppings.add(MAPPER.readValue(toppingStr, Topping.class));
+            toppings.add(MAPPER.readValue("\""+toppingStr+"\"", Topping.class));
         }
         
-        final Order newOrder = new Order(name, type, pickup, orderDate, toppings);
+        final Order newOrder = new Order(name, type, pickup, dateOfOrder, toppings);
         final Order oldOrder = ORDERS.put(newOrder.getId(), newOrder);
         return newOrder.getId();
     }

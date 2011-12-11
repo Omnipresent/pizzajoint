@@ -4,28 +4,21 @@
  */
 package com.practice.pizzajoint.parameter;
 
-import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
 
 /**
  *
  * @author bhaarat
  */
-public class CsvParam {
+public class CsvParam extends AbstractParameter<Iterable<String>> {
     
-    private final Iterable<String> value;
     
-    public CsvParam(String param) throws Throwable {
-        value = parse(param);
+    public CsvParam(String param) {
+        super(param);
     }
-    
-    public Iterable<String> parse(String param) throws Throwable {
+
+    @Override
+    public Iterable<String> parse(String param) {
         return Splitter.on(",").trimResults().omitEmptyStrings().split(param);
     }
-    
-    public Iterable<String> getValue() {
-        return this.value;
-    }
-    
-    
 }
