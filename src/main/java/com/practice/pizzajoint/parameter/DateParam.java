@@ -6,6 +6,7 @@ package com.practice.pizzajoint.parameter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -13,9 +14,9 @@ import java.util.Date;
  */
 public class DateParam extends AbstractParameter<Date> {
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     
-    public DateParam (String date) {
+    public DateParam (String date) throws WebApplicationException {
         super (date);
     }
     

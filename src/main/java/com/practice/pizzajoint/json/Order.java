@@ -5,6 +5,7 @@
 package com.practice.pizzajoint.json;
 
 import com.google.common.collect.Lists;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Order {
     
     private final int id;
     private final String orderName;
-    private final boolean isReady;
+    private final boolean carryout;
     private final Date dateOfOrder;
     private final String crustType;
     private final List<Topping> toppings;
@@ -35,16 +36,17 @@ public class Order {
         return ID_COUNTER;
     }
 
-    public Date getDateOfOrder() {
-        return dateOfOrder;
+    public String getDateOfOrder() {
+        SimpleDateFormat sd = new SimpleDateFormat("MM-dd-yyyy");
+        return sd.format(dateOfOrder);
     }
 
     public int getId() {
         return id;
     }
 
-    public boolean isIsReady() {
-        return isReady;
+    public boolean isCarryout () {
+        return carryout;
     }
 
     public String getOrderName() {
@@ -55,20 +57,20 @@ public class Order {
         return toppings;
     }
     
-    public Order (String name, String crustType, boolean ready, Date orderDate, Iterable<Topping> toppings) {
-        this(ID_COUNTER.incrementAndGet(), name, crustType, ready, orderDate, toppings);
+    public Order (String name, String crustType, boolean carryout, Date orderDate, Iterable<Topping> toppings) {
+        this(ID_COUNTER.incrementAndGet(), name, crustType, carryout, orderDate, toppings);
     }
     
     @JsonCreator
     public Order (@JsonProperty("uid") int id, 
                   @JsonProperty("name") String name,
                   @JsonProperty("crusttype") String crustType,
-                  @JsonProperty("ready") boolean ready,
+                  @JsonProperty("ready") boolean carryout,
                   @JsonProperty("orderdate") Date orderDate,
                   @JsonProperty("toppings") Iterable<Topping> toppings) {
         this.id = id;
         this.orderName = name;
-        this.isReady = ready;
+        this.carryout = carryout;
         this.dateOfOrder = orderDate;
         this.crustType = crustType;
         this.toppings = Collections.unmodifiableList(Lists.newArrayList(toppings));

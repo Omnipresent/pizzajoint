@@ -99,24 +99,6 @@
           <artifactId>jersey-guice</artifactId>
           <version>${jersey.version}</version>
         </dependency>
-
-        <!-- Metrics -->
-        <dependency>
-          <groupId>com.yammer.metrics</groupId>
-          <artifactId>metrics-core</artifactId>
-          <version>${metrics.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>com.yammer.metrics</groupId>
-          <artifactId>metrics-servlet</artifactId>
-          <version>${metrics.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>com.yammer.metrics</groupId>
-          <artifactId>metrics-guice</artifactId>
-          <version>${metrics.version}</version>
-        </dependency>        
-        
     </dependencies>
 
     <build>
