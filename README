@@ -16,4 +16,7 @@ The following libraries are used
 Let's eat some pizza
 --------------------
 Run the service
-  % mvn tomcat:run
+
+    % mvn tomcat:run
+
+View the orders
