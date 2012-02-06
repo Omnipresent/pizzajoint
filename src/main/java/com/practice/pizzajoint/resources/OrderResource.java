@@ -6,6 +6,7 @@ import com.practice.pizzajoint.json.Order;
 import com.practice.pizzajoint.json.Topping;
 import com.practice.pizzajoint.parameter.CsvParam;
 import com.practice.pizzajoint.parameter.DateParam;
+import com.practice.pizzajoint.parameter.SimpleDateParam;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
@@ -56,7 +57,7 @@ public class OrderResource {
     @POST
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     public int prepareOrder(@FormParam("ordername") String name,
-                            @FormParam("readydate") DateParam orderDate,
+                            @FormParam("readydate") SimpleDateParam orderDate,
                             @FormParam("crust") String type,
                             @FormParam("carryout") @DefaultValue ("false") boolean carryout,
                             @FormParam("toppings") CsvParam csvToppings) throws IOException, Throwable {
@@ -64,7 +65,6 @@ public class OrderResource {
         Date dateOfOrder = orderDate.getValue();
         for (String toppingStr : csvToppings.getValue())
             toppings.add(MAPPER.readValue("\""+toppingStr+"\"", Topping.class));
-        
         final Order newOrder = new Order(name, type, carryout, dateOfOrder, toppings);
         final Order oldOrder = ORDERS.put(newOrder.getId(), newOrder);
         return newOrder.getId();
