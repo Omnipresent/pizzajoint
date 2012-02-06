@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.practice.pizzajoint.json;
 
 import java.io.IOException;
@@ -39,22 +35,17 @@ public class Topping {
     }
     
     public static class ToppingSerializer extends JsonSerializer<Topping> {
-
         @Override
         public void serialize(Topping t, JsonGenerator jg, SerializerProvider sp) throws IOException  {
             jg.writeString(t.getToppingName());
         }
-        
     }
     
     public static class ToppingDeserializer extends JsonDeserializer<Topping> {
-
         @Override
         public Topping deserialize(JsonParser jp, DeserializationContext dc) throws IOException, JsonProcessingException {
             String toppingName = jp.getText();
             return new Topping(toppingName);
         }
-        
     }
-    
 }

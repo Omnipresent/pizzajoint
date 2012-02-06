@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.practice.pizzajoint.parameter;
 
 import javax.ws.rs.WebApplicationException;
@@ -22,7 +18,6 @@ public abstract class AbstractParameter <V>{
         catch (Throwable e) {
             throw new WebApplicationException();
         }
-        
     }
     
     public abstract V parse(String param) throws Throwable;

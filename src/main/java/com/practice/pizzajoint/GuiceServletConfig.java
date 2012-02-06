@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.practice.pizzajoint;
 
 import com.google.common.collect.ImmutableMap;
@@ -25,25 +21,18 @@ public class GuiceServletConfig extends GuiceServletContextListener{
     static {
         final ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
         builder.put(JERSEY_API_JSON_POJO_MAPPING_FEATURE, "true");
-        
         INIT_PARAMS = builder.build();
     }
 
     @Override
     protected Injector getInjector() {
         return Guice.createInjector(new JerseyServletModule() {
-           
             @Override
             protected void configureServlets () {
-                
                 /* bind the REST  resources*/
                 bind(OrderResource.class);
-                
                 serve("/rest/*").with(GuiceContainer.class, INIT_PARAMS);
             }
         });
     }
-    
-    
-
 }

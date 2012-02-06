@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.practice.pizzajoint.resources;
 
 import com.google.common.collect.Lists;
@@ -32,6 +28,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  *
  * @author bhaarat
  */
+
 @Path("/orders")
 @Produces({MediaType.APPLICATION_JSON})
 public class OrderResource {
@@ -62,7 +59,7 @@ public class OrderResource {
                             @FormParam("readydate") DateParam orderDate,
                             @FormParam("crust") String type,
                             @FormParam("carryout") @DefaultValue ("false") boolean carryout,
-                            @FormParam("toppings") @DefaultValue("") CsvParam csvToppings) throws IOException, Throwable {
+                            @FormParam("toppings") CsvParam csvToppings) throws IOException, Throwable {
         List<Topping> toppings = Lists.newLinkedList();
         Date dateOfOrder = orderDate.getValue();
         for (String toppingStr : csvToppings.getValue())

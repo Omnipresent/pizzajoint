@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.practice.pizzajoint.json;
 
 import com.google.common.collect.Lists;
@@ -27,11 +23,9 @@ public class Order {
     private final String crustType;
     private final List<Topping> toppings;
 
-    
     public String getCrustType() {
         return this.crustType;
     }
-    
     public static AtomicInteger getID_COUNTER() {
         return ID_COUNTER;
     }
@@ -56,11 +50,9 @@ public class Order {
     public List<Topping> getToppings() {
         return toppings;
     }
-    
     public Order (String name, String crustType, boolean carryout, Date orderDate, Iterable<Topping> toppings) {
         this(ID_COUNTER.incrementAndGet(), name, crustType, carryout, orderDate, toppings);
     }
-    
     @JsonCreator
     public Order (@JsonProperty("uid") int id, 
                   @JsonProperty("name") String name,
@@ -75,5 +67,4 @@ public class Order {
         this.crustType = crustType;
         this.toppings = Collections.unmodifiableList(Lists.newArrayList(toppings));
     }
-    
 }
