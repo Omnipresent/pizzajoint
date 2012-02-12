@@ -16,7 +16,12 @@ public abstract class AbstractParameter <V>{
             this.value = parse(param);
         }
         catch (Throwable e) {
-            throw new WebApplicationException();
+            throw new WebApplicationException(
+              Response
+                .status(Status.BAD_REQUEST)
+                .entity(e.getMessage())
+                .build()
+            );
         }
     }
     
