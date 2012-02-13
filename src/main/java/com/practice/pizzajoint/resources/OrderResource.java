@@ -7,6 +7,7 @@ import com.practice.pizzajoint.json.Topping;
 import com.practice.pizzajoint.parameter.CsvParam;
 import com.practice.pizzajoint.parameter.DateParam;
 import com.practice.pizzajoint.parameter.SimpleDateParam;
+import com.practice.pizzajoint.parameter.SimpleCsvParam;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
@@ -60,7 +61,7 @@ public class OrderResource {
                             @FormParam("readydate") SimpleDateParam orderDate,
                             @FormParam("crust") String type,
                             @FormParam("carryout") @DefaultValue ("false") boolean carryout,
-                            @FormParam("toppings") CsvParam csvToppings) throws IOException, Throwable {
+                            @FormParam("toppings") SimpleCsvParam csvToppings) throws IOException, Throwable {
         List<Topping> toppings = Lists.newLinkedList();
         Date dateOfOrder = orderDate.getValue();
         for (String toppingStr : csvToppings.getValue())

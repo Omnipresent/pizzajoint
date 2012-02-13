@@ -1,17 +1,11 @@
 package com.practice.pizzajoint.parameter;
 
 import javax.ws.rs.WebApplicationException;
-
-/**
- *
- * @author bhaarat
- */
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.Response;
 public abstract class AbstractParameter <V>{
     private final V value;
-    private final String originalParam;
-    
     public AbstractParameter(String param) throws WebApplicationException{
-        this.originalParam = param;
         try {
             this.value = parse(param);
         }
@@ -24,9 +18,9 @@ public abstract class AbstractParameter <V>{
             );
         }
     }
-    
+
     public abstract V parse(String param) throws Throwable;
-    
+  
     public V getValue() {
         return this.value;
     }
